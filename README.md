@@ -1,5 +1,5 @@
 # Password_Generator
-####*Sundeep Mistry - (23/09/2021)*
+*Sundeep Mistry - (23/09/2021)*
 
 A password generator created in python using the randint() and shuffle() functions found in the random package. 
 This script takes 4 user entered numbers between 1 and 5, each representing how many capitals, lower case, numbers and 
