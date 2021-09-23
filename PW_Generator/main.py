@@ -1,27 +1,11 @@
 import random
-
-
-def shuffle(pw: str):
-    tmp_list = list(pw)
-    random.shuffle(tmp_list)
-    return ''.join(tmp_list)
-
-
-def initial_pw(cap: list, low: list, num: list, sym: list) -> str:
-    tmp_pw = ''
-    for c in cap:
-        tmp_pw += c
-    for l in low:
-        tmp_pw += l
-    for n in num:
-        tmp_pw += n
-    for s in sym:
-        tmp_pw += s
-    return tmp_pw
+# The use of the 'chr()' function in this script lets us take the random int and convert it to its Ascii equivalent
 
 
 def generate_cap(size: int):
-    # Temp list for generated values
+    # Creates a list of capital letters
+    # Ascii value of random number generated determines the letter stored in list
+    # A list holding these capital letters is returned
     tmp_cap = []
 
     while tmp_cap.__len__() < size:
@@ -31,6 +15,9 @@ def generate_cap(size: int):
 
 
 def generate_low(size: int):
+    # Creates a list of lowercase letters
+    # Ascii value of random number generated determines the letter stored in list
+    # A list holding these lowercase letters is returned
     tmp_low = []
 
     while tmp_low.__len__() < size:
@@ -40,6 +27,9 @@ def generate_low(size: int):
 
 
 def generate_num(size: int):
+    # Creates a list of numbers
+    # Ascii value of random number generated determines the number stored in list
+    # A list holding these numbers is returned
     tmp_num = []
 
     while tmp_num.__len__() < size:
@@ -49,6 +39,9 @@ def generate_num(size: int):
 
 
 def generate_symbol(size: int):
+    # Creates a list of numbers
+    # Ascii value of random number generated determines the symbol stored in list
+    # A list holding these symbols is returned
     tmp_symbol = []
 
     while tmp_symbol.__len__() < size:
@@ -69,22 +62,63 @@ def generate_symbol(size: int):
     return tmp_symbol
 
 
-user_values = []
+def initial_pw(cap: list, low: list, num: list, sym: list) -> str:
+    # Based on the previously generated lists, we iterate through each and create a single string holding all values
+    # from the lists and returns it
+    tmp_pw = ''
+    for c in cap:
+        tmp_pw += c
+    for l in low:
+        tmp_pw += l
+    for n in num:
+        tmp_pw += n
+    for s in sym:
+        tmp_pw += s
+    return tmp_pw
 
-for i in range(4):
-    user_num = int(input("Enter 4 numbers between 1 and 5: "))
-    if user_num > 5:
-        print("Please enter a number less than 5")
-    else:
-        user_values.insert(i, user_num)
+
+def shuffle(pw: str):
+    # Takes the returned string from the 'initial_pw()' function and casts the string to a list
+    # From this we then use random.shuffle() to shuffle the order of the items of the password
+    # We then return a string containing the shuffled password
+    tmp_list = list(pw)
+    random.shuffle(tmp_list)
+    return ''.join(tmp_list)
 
 
-capital = generate_cap(user_values[0])
-lower = generate_low(user_values[1])
-number = generate_num(user_values[2])
-gen_symbol = generate_symbol(user_values[3])
+def run():
+    # First asks for the user to enter 4 numbers between 1 and 4, validating each input
+    # If the input is valid it is then appended to a list
+    user_values = []
+    counter = 0
+    while counter < 5:
+        try:
+            user_num = int(input("Please enter a value between 1 and 4: "))
+        except ValueError:
+            print("Sorry, try another value")
+            continue
+        else:
+            if user_num > 4:
+                print("Your value is too big, try again")
+            else:
+                user_values.append(user_num)
+                counter += 1
 
-unshuffled_pw = initial_pw(capital, lower, number, gen_symbol)
-final_pw = shuffle(unshuffled_pw)
-print(final_pw)
+    # It then use the values from the previously created list to represent how many caps, lowercase, number and symbols
+    # the user wants in their password
+    capital = generate_cap(user_values[0])
+    lower = generate_low(user_values[1])
+    number = generate_num(user_values[2])
+    gen_symbol = generate_symbol(user_values[3])
 
+    # We then create an initial password (String) from the previously generated lists
+    unshuffled_pw = initial_pw(capital, lower, number, gen_symbol)
+
+    # Shuffle the inital password to create the final password
+    final_pw = shuffle(unshuffled_pw)
+
+    # Print the final results to the console
+    print(final_pw)
+
+
+run()
