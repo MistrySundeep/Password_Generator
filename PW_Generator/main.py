@@ -98,7 +98,7 @@ def run():
             print("Sorry, try another value")
             continue
         else:
-            if user_num > 4:
+            if user_num > 5:
                 print("Your value is too big, try again")
             else:
                 user_values.append(user_num)
@@ -114,7 +114,7 @@ def run():
     # We then create an initial password (String) from the previously generated lists
     unshuffled_pw = initial_pw(capital, lower, number, gen_symbol)
 
-    # Shuffle the inital password to create the final password
+    # Shuffle the initial password to create the final password
     final_pw = shuffle(unshuffled_pw)
 
     # Print the final results to the console
