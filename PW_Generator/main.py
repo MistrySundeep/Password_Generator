@@ -91,7 +91,7 @@ def run():
     # If the input is valid it is then appended to a list
     user_values = []
     counter = 0
-    while counter < 5:
+    while counter < 4:
         try:
             user_num = int(input("Please enter a value between 1 and 4: "))
         except ValueError:
